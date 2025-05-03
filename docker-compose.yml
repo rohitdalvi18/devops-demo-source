@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  login:
+    build: ./login-service
+    ports: ["3001:3000"]
+  order:
+    build: ./order-service
+    ports: ["3002:3000"]
+  inventory:
+    build: ./inventory-service
+    ports: ["3003:3000"]
+  frontend:
+    build: ./frontend
+    ports: ["8080:80"]
+    depends_on:
+      - login
+      - order
+      - inventory
