@@ -1,0 +1,12 @@
+{
+  "name": "inventory-service",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo ok"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "node-fetch": "^2.7.0"
+  }
+}
