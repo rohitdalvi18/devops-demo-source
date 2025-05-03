@@ -2,17 +2,33 @@ version: "3.8"
 services:
   login:
     build: ./login-service
-    ports: ["3001:3000"]
+    networks:
+      - demo-net
+
   order:
     build: ./order-service
-    ports: ["3002:3000"]
+    networks:
+      - demo-net
+
   inventory:
     build: ./inventory-service
-    ports: ["3003:3000"]
+    networks:
+      - demo-net
+
   frontend:
-    build: ./frontend
-    ports: ["8080:80"]
+    image: nginx:alpine
+    volumes:
+      - ./frontend/index.html:/usr/share/nginx/html/index.html
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
     depends_on:
       - login
       - order
       - inventory
+    networks:
+      - demo-net
+
+networks:
+  demo-net:
+    driver: bridge
