@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT||3000;
 
 app.get('/inventory', (req,res) => {
-  res.json([{ sku:"A1", qty:100 }, { sku:"B2", qty:200 }]);
+  res.json([{ sku:"Apple", qty:100 }, { sku:"Banana", qty:200 }]);
 });
 
 // app.get('/inventory', (req, res) => {
