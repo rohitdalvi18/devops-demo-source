@@ -1,3 +1,4 @@
+const e = require('express');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,23 +19,31 @@ app.get('/', (req, res) => {
 
 // Login route – calls login-service and shows result
 app.get('/login', async (req, res) => {
-  const { user, pass } = req.query;
+  const { user, pass, q } = req.query;
   let color = 'red'
   let img = 'https://media.makeameme.org/created/when-your-login.jpg';
 
   try {
+    console.log(`Query param q: ${q}`);
+
     const r = await fetch(`http://login/login?user=${user}&pass=${pass}`);
     const json = await r.json();
+
     if (json.authenticated) {
       color = 'green';
       img = 'https://jasonstcyr.com/wp-content/uploads/2020/12/maxresdefault1.jpg';
     }
+    if (q === 'json') {
+      res.json(json);
+    } else {
     res.set('Content-Type', 'text/html');
     res.send(`<body style="background-color: ${color}; color: white"><h1>Login</h1>
       <p>Authenticated: ${json.authenticated}</p>
       <img src="${img}" alt="Image" style="width: 500px; height: auto;">
       <a href="/">Back</a></body>`);
+    }
   } catch (e) {
+    console.log(e);
     res.status(500).send('<h1>Error calling login-service</h1>');
   }
 });
