@@ -7,29 +7,37 @@ networks:
 services:
   login:
     build: ./login-service
+    environment:
+      - PORT=80              # tell Express to listen on 80
     ports:
-      - "3001:3000"         # host:container
+      - "3001:80"            # map host 3001 → container 80
     networks:
       - demo-net
 
   order:
     build: ./order-service
+    environment:
+      - PORT=80
     ports:
-      - "3002:3000"
+      - "3002:80"
     networks:
       - demo-net
 
   inventory:
     build: ./inventory-service
+    environment:
+      - PORT=80
     ports:
-      - "3003:3000"
+      - "3003:80"
     networks:
       - demo-net
 
   frontend:
-    build: ./frontend-service    
+    build: ./frontend-service
+    environment:
+      - PORT=80
     ports:
-      - "8080:3000"
+      - "8080:80"
     depends_on:
       - login
       - order

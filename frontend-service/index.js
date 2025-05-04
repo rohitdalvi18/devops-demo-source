@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.get('/login', async (req, res) => {
   const { user, pass } = req.query;
   try {
-    const r = await fetch(`http://login:3000/login?user=${user}&pass=${pass}`);
+    const r = await fetch(`http://login/login?user=${user}&pass=${pass}`);
     const json = await r.json();
     res.set('Content-Type','text/html');
     res.send(`<h1>Login</h1>
@@ -34,7 +34,7 @@ app.get('/login', async (req, res) => {
 // Orders route – calls order-service and renders list
 app.get('/orders', async (req, res) => {
   try {
-    const r = await fetch('http://order:3000/orders');
+    const r = await fetch('http://order/orders');
     const orders = await r.json();
     const list = orders.map(o => `<li>Order ${o.id}: ${o.item}</li>`).join('');
     res.set('Content-Type','text/html');
@@ -48,7 +48,7 @@ app.get('/orders', async (req, res) => {
 // Inventory route – calls inventory-service and renders list
 app.get('/inventory', async (req, res) => {
   try {
-    const r = await fetch('http://inventory:3000/inventory');
+    const r = await fetch('http://inventory/inventory');
     const inv = await r.json();
     const list = inv.map(i => `<li>${i.sku}: ${i.qty}</li>`).join('');
     res.set('Content-Type','text/html');
