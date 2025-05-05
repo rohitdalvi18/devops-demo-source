@@ -5,10 +5,13 @@ const port = process.env.PORT || 3000;
 
 // Home page
 app.get('/', (req, res) => {
+  const color = process.env.ACTIVE_COLOR || 'unknown';
+  console.log(`Active version: ${color}`);
   res.set('Content-Type', 'text/html');
   res.send(`<!DOCTYPE html>
 <html><head><title>Demo</title></head><body>
   <h1>DevOps Demo</h1>
+   <p>Current Active Version: <strong style="color:${color}">${color.toUpperCase()}</strong></p>
   <ul>
     <li><a href="/login?user=admin&pass=password">Test Login</a></li>
     <li><a href="/orders">View Orders</a></li>
