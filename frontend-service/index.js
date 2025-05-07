@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   console.log(`Active version: ${color}`);
   res.set('Content-Type', 'text/html');
   res.send(`<!DOCTYPE html>
-<html><head><title>Demo</title></head><body>
+<html><head><title>DevOps Demo</title></head><body>
   <h1>DevOps Demo</h1>
    <p>Current Active Version: <strong style="color:${color}">${color.toUpperCase()}</strong></p>
   <ul>
