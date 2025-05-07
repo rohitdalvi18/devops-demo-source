@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/orders', (req, res) => {
-  res.json([{ id:1, item:"Apple" }, { id:2, item:"Banana" }]);
+  res.json([{ id:1, item:"Apple" }, { id:2, item:"Banana" }, { id:3, item:"Mango" }]);
 });
 
 
